@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Mail;
 use Auth;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
+use App\Mail\SendActivationToken;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -86,6 +88,8 @@ class RegisterController extends Controller
         $token = $user->activationToken()->create([
             'token' =>  str_random(128),
         ]);
+
+        Mail::to($user)->send(new SendActivationToken($token));
 
         return redirect('/login')->withInfo('Please now activate your account');
     }
