@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function byEmail($email)
+    {
+        return static::where('email', $email);
+    }
+
     public function activationToken()
     {
         return $this->hasOne(ActivationToken::class);
