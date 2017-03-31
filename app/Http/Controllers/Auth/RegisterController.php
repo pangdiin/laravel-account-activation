@@ -85,6 +85,6 @@ class RegisterController extends Controller
 
        
 
-        return redirect('/login')->withInfo('Please now activate your account <a href="'. route('auth.activate.resend') . '?email=' . $user->email . '">Resend</a>');
+        return redirect('/login')->withInfo('Please now activate your account');
     }
 }
